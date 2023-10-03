@@ -1,16 +1,23 @@
 package org.example;
 
 import BasePackage.BaseApp;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 
 
+
 import static org.apache.spark.sql.functions.*;
 public class App2 extends BaseApp {
+
+    private static final Logger logger = LogManager.getLogger(App2.class);
     public String csvPath=null;
     public String  outputpath= null;
 
     public void Start() {
+
+
         init();
 
         println("---------------------------reading csv file ----------------------------");
@@ -37,10 +44,12 @@ public class App2 extends BaseApp {
         println("-----------------------------writing to a file--------------------------");
         df.write().mode("overwrite").parquet(outputpath);
         println("file successfully written to the given path : " + outputpath);
+
     }
 
     public static void main(String[] args) {
 
+        logger.info("application starts");
         if(args.length < 1) {
 
             System.out.println("uage of swiggy csv file");
@@ -53,8 +62,10 @@ public class App2 extends BaseApp {
         app2.Start();
         app2.close();
 
-    }
+        logger.error("has error");
 
+
+    }
 
 
 }

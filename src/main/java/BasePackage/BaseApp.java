@@ -22,8 +22,6 @@ public class BaseApp {
         println("Initializing SparkSession");
         conf = new SparkConf().setAppName(getClass().getName()).setAppName("local[*]");
         sparkSession = SparkSession.builder().config(conf).getOrCreate();
-        final SparkContext sparkContext = sparkSession.sparkContext();
-        sc = new JavaSparkContext(sparkContext);
         sessionStartTime = System.currentTimeMillis();
 
     }
